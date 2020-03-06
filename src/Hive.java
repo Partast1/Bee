@@ -7,7 +7,10 @@ public class Hive {
 //    Attributes
     private double honeyStorage;
     private int flowerCount;
-    
+
+    BeeFactory beeFactory = new BeeFactory();
+    BeeThreadHandler beeThreadHandler = new BeeThreadHandler();
+
 //    Getters
     public double getHoneyStorage() {
         return honeyStorage;
@@ -15,6 +18,7 @@ public class Hive {
     public int getFlowerCount() {
         return flowerCount;
     }
+
 
 //    Setters
     public void setHoneyStorage(double honeyStorage) {
@@ -28,6 +32,17 @@ public class Hive {
         honeyStorage = 0;
         flowerCount = 0;
 
+        for (int i = 0; i < 666; i++)
+        {
+            Runnable gather = beeFactory.CreateGatherBee();
+            beeThreadHandler.beeQueue.add(gather);
+
+        }
+        for (int i = 0; i < 333; i++)
+        {
+            Runnable produce = beeFactory.CreateProductionBee();
+            beeThreadHandler.beeQueue.add(produce);
+        }
 
     }
 }

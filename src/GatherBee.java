@@ -1,12 +1,19 @@
 import java.util.Random;
 
 public class GatherBee extends Bee implements Runnable{
+
+    Hive hive = new Hive();
+
     @Override
     public void run() {
-
+        try {
+            GatherNectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private double GatherNectar() throws Exception
+    private void GatherNectar() throws Exception
     {
         int min = 100;
         int max = 500;
@@ -14,8 +21,10 @@ public class GatherBee extends Bee implements Runnable{
         int gatherTime = rnd.nextInt(min - max);
         Thread.sleep(gatherTime);
 
-        double gatheredNectar = 0.00125;
-        return gatheredNectar;
+        double gatheredNectar = hive.getHoneyStorage() + 0.00125;
+        hive.setHoneyStorage(gatheredNectar);
+
+
     }
     private void DelieverNectar()
     {
