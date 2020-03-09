@@ -1,9 +1,9 @@
 import java.util.Random;
 
-public class GatherBee extends Bee implements Runnable{
+public class GatherBee extends Bee implements Runnable {
 
-    Hive hive = new Hive();
-
+    Hive hive = Hive.Singleton();
+ProductionBee bb;
     @Override
     public void run() {
         try {
@@ -13,21 +13,17 @@ public class GatherBee extends Bee implements Runnable{
         }
     }
 
-    private void GatherNectar() throws Exception
+    private void GatherNectar() throws InterruptedException
     {
+
         int min = 100;
         int max = 500;
         Random rnd = new Random();
-        int gatherTime = rnd.nextInt(min - max);
+        int gatherTime = rnd.nextInt( max);
         Thread.sleep(gatherTime);
-
-        double gatheredNectar = hive.getHoneyStorage() + 0.00125;
-        hive.setHoneyStorage(gatheredNectar);
-
+        double gatheredNectar = 0.00125;
+        bb.beesRequiredHelp.add(Thread.currentThread());
 
     }
-    private void DelieverNectar()
-    {
 
-    }
 }

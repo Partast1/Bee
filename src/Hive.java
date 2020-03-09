@@ -1,3 +1,47 @@
+//import java.util.concurrent.ExecutorService;
+//import java.util.concurrent.Executors;
+//import java.util.concurrent.locks.ReentrantLock;
+//import java.util.jar.Attributes;
+//
+//public class Hive {
+//    //    Attributes
+//    private double honeyStorage;
+//    private int flowerCount;
+//
+//    BeeFactory beeFactory = new BeeFactory();
+//    BeeThreadHandler beeThreadHandler = new BeeThreadHandler();
+//
+//    //    Getters
+//    public double getHoneyStorage() {
+//        return honeyStorage;
+//    }
+//    public int getFlowerCount() {
+//        return flowerCount;
+//    }
+//
+//    //    Setters
+//    public void setHoneyStorage(double honeyStorage) {
+//        this.honeyStorage = honeyStorage;
+//    }
+//    public void setFlowerCount(int flowerCount) {
+//        this.flowerCount = flowerCount;
+//    }
+//
+//    public Hive()
+//    {
+//        honeyStorage = 0;
+//        flowerCount = 0;
+//
+//
+//
+////            beeThreadHandler.GatherHandler(gather);
+//
+////            Runnable produce = beeFactory.CreateProductionBee();
+////            beeThreadHandler.beeQueue.add(produce);
+//
+//    }
+//}
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
@@ -7,18 +51,16 @@ public class Hive {
 //    Attributes
     private double honeyStorage;
     private int flowerCount;
+    private static Hive single_instance=null;
 
-    BeeFactory beeFactory = new BeeFactory();
-    BeeThreadHandler beeThreadHandler = new BeeThreadHandler();
 
-//    Getters
+    //    Getters
     public double getHoneyStorage() {
         return honeyStorage;
     }
     public int getFlowerCount() {
         return flowerCount;
     }
-
 
 //    Setters
     public void setHoneyStorage(double honeyStorage) {
@@ -27,22 +69,17 @@ public class Hive {
     public void setFlowerCount(int flowerCount) {
         this.flowerCount = flowerCount;
     }
-    public Hive()
+    private Hive()
     {
-        honeyStorage = 0;
-        flowerCount = 0;
-
-        for (int i = 0; i < 666; i++)
+      
+    }
+    public static Hive Singleton()
+    {
+        // To ensure only one instance is created
+        if (single_instance == null)
         {
-            Runnable gather = beeFactory.CreateGatherBee();
-            beeThreadHandler.beeQueue.add(gather);
-
+            single_instance = new Hive();
         }
-        for (int i = 0; i < 333; i++)
-        {
-            Runnable produce = beeFactory.CreateProductionBee();
-            beeThreadHandler.beeQueue.add(produce);
-        }
-
+        return single_instance;
     }
 }

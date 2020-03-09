@@ -1,2 +1,2 @@
-abstract public class Bee {
+abstract public class Bee  {
 }
